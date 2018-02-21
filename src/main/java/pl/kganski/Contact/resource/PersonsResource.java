@@ -20,10 +20,24 @@ public class PersonsResource {
         return personsRepository.findAll();
     }
 
-    @PostMapping(value = "/load")
-    public List<Person> persist(@RequestBody final Person person) {
+    @GetMapping(value = "/{name")
+    public List<Person> getPerson(@PathVariable("name") final String name) {
 
-        personsRepository.save(person);
-        return personsRepository.findAll();
+        return personsRepository.findByName(name);
+    }
+
+    @GetMapping(value = "/id/{id}")
+    public Person getId(@PathVariable("id") final Integer id) {
+
+        return personsRepository.findOne(id);
+    }
+
+    @GetMapping(value = "/update/{id}/{name}")
+    public Person update(@PathVariable("id") final Integer id, @PathVariable("name") final String name) {
+
+        Person person = getId(id);
+        person.setName(name);
+
+        return personsRepository.save(person);
     }
 }
