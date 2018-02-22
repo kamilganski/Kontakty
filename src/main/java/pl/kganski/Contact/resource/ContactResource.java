@@ -35,7 +35,7 @@ public class ContactResource {
         try {
             Contact contact = new Contact(mobile, email, phone, personId);
 
-            if((findByMobile(mobile) == "0" || findByPersonId(personId) != personId) || (findByEmail(email) == "0" || findByPersonId(personId) != personId) || (findByPhone(phone) == "0" || findByPersonId(personId) != personId)) {
+            if(findByMobile(mobile) == "0" || findByEmail(email) == "0" || findByPhone(phone) == "0") {
 
                 contactRepository.save(contact);
 
