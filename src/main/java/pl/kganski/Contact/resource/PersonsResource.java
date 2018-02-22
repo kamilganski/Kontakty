@@ -42,7 +42,7 @@ public class PersonsResource {
             if(findByPesel(pesel) == "1") {
 
                 personsRepository.save(person);
-                person_id = String.valueOf(person.getId_person());
+                person_id = String.valueOf(person.getId());
 
                 return "Dodano osobe o id: " + person_id;
             }
@@ -87,7 +87,7 @@ public class PersonsResource {
 
         try {
             Person person = personsRepository.findByName(name);
-            person_id = String.valueOf(person.getId_person());
+            person_id = String.valueOf(person.getId());
         }
         catch (Exception ex) {
             return "Nie znaleziono takiej osoby!";

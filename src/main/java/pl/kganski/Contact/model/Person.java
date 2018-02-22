@@ -11,7 +11,8 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_person;
+    @Column(name = "id_person")
+    private Integer id;
 
     @NotNull
     private String name;
@@ -28,15 +29,15 @@ public class Person {
     @NotNull
     private String pesel;
 
-    /*@OneToMany
-    @JoinColumn(name = "person_id")
-    private List<Contact> contacts;*/
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_person", referencedColumnName = "id_person")
+    private List<Contact> contacts;
 
     public Person() {
     }
 
-    public Person(Integer id_person) {
-        this.id_person = id_person;
+    public Person(Integer id) {
+        this.id = id;
     }
 
     public Person(String name, String surname, String gender, String date_of_birth, String pesel) {
@@ -47,12 +48,12 @@ public class Person {
         this.pesel = pesel;
     }
 
-    public Integer getId_person() {
-        return id_person;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_person(Integer id_person) {
-        this.id_person = id_person;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -95,11 +96,11 @@ public class Person {
         this.pesel = pesel;
     }
 
-    /*public List<Contact> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
-    }*/
+    }
 }
