@@ -35,7 +35,7 @@ public class ContactResource {
         try {
             Contact contact = new Contact(mobile, email, phone, personId);
 
-            if((findByMobile(mobile) == "0") || (findByEmail(email) == "0") || (findByPhone(phone) == "0")) {
+            if((findByMobile(mobile) == "0" || findByPersonId(personId) != personId) || (findByEmail(email) == "0" || findByPersonId(personId) != personId) || (findByPhone(phone) == "0" || findByPersonId(personId) != personId)) {
 
                 contactRepository.save(contact);
 
@@ -45,14 +45,29 @@ public class ContactResource {
         catch (Exception ex) {
             return "Nie udało się dodać kontaktu, błąd: " + ex.toString();
         }
-        return "Istnieje już konakt z takim nr telefonu lub emailem lub nr telefonu stacjonarnego!";
+        return "Istnieje już kontakt z takim nr telefonu lub emailem lub nr telefonu stacjonarnego!";
+    }
+
+    @RequestMapping("/delete-contact")
+    @ResponseBody
+    public String delete(Integer id) {
+        try {
+            Contact contact = new Contact(id);
+
+            contactRepository.delete(contact);
+        }
+        catch (Exception ex) {
+            return "Nie udało się usunąć kontaktu, błąd: " + ex.toString();
+        }
+        return "Kontakt pomyślnie usunięty!";
     }
 
     @RequestMapping("/find-by-mobile")
     @ResponseBody
     public String findByMobile(String mobile) {
         try {
-            Contact contact = contactRepository.findByMobile(mobile);
+            Contact contact = null;
+            contact = contactRepository.findByMobile(mobile);
 
             if(contact == null) {
                 return "0";
@@ -68,7 +83,8 @@ public class ContactResource {
     @ResponseBody
     public String findByEmail(String email) {
         try {
-            Contact contact = contactRepository.findByEmail(email);
+            Contact contact = null;
+            contact = contactRepository.findByEmail(email);
 
             if(contact == null) {
                 return "0";
@@ -84,7 +100,8 @@ public class ContactResource {
     @ResponseBody
     public String findByPhone(String phone) {
         try {
-            Contact contact = contactRepository.findByPhone(phone);
+            Contact contact = null;
+            contact = contactRepository.findByPhone(phone);
 
             if(contact == null) {
                 return "0";
@@ -100,7 +117,8 @@ public class ContactResource {
     @ResponseBody
     public Integer findByPersonId(Integer personId) {
         try {
-            Contact contact = contactRepository.findByPersonId(personId);
+            Contact contact = null;
+            contact = contactRepository.findByPersonId(personId);
 
             if(contact == null) {
                 return 0;

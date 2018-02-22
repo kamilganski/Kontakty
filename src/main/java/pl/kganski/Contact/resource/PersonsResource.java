@@ -39,7 +39,7 @@ public class PersonsResource {
         try {
             Person person = new Person(name, surname, gender, date_of_birth, pesel);
 
-            if(findByPesel(pesel) == "1") {
+            if(findByPesel(pesel) == "0") {
 
                 personsRepository.save(person);
                 person_id = String.valueOf(person.getId());
@@ -50,7 +50,7 @@ public class PersonsResource {
         catch (Exception ex) {
             return "Nie udało się dodać osoby, błąd: " + ex.toString();
         }
-        return "Isniteje już osoba o takim peselu!";
+        return "Istnieje już osoba o takim peselu!";
     }
 
     @RequestMapping("/delete")
@@ -64,7 +64,7 @@ public class PersonsResource {
         catch (Exception ex) {
             return "Nie udało się usunąć osoby, błąd: " + ex.toString();
         }
-        return "Osoba usunięta pomyślnie!";
+        return "Osoba pomyślnie usunięta!";
     }
 
     @RequestMapping("/find-by-id")
@@ -79,30 +79,19 @@ public class PersonsResource {
         return id;
     }
 
-    @RequestMapping("/find-by-name")
-    @ResponseBody
-    public String findByName(String name) {
-
-        String person_id = "";
-
-        try {
-            Person person = personsRepository.findByName(name);
-            person_id = String.valueOf(person.getId());
-        }
-        catch (Exception ex) {
-            return "Nie znaleziono takiej osoby!";
-        }
-        return "Id osoby to: " + person_id;
-    }
-
     @RequestMapping("/find-by-pesel")
     @ResponseBody
     public String findByPesel(String pesel) {
         try {
-            Person person = personsRepository.findByPesel(pesel);
+            Person person = null;
+            person = personsRepository.findByPesel(pesel);
+
+            if(person == null) {
+                return "0";
+            }
         }
         catch (Exception ex) {
-            return "0";
+            return "Błąd: " + ex.toString();
         }
         return "1";
     }

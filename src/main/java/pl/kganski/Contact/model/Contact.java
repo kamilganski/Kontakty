@@ -26,6 +26,10 @@ public class Contact {
     public Contact() {
     }
 
+    public Contact(Integer id_contact) {
+        this.id_contact = id_contact;
+    }
+
     public Contact(String mobile, String email, String phone, Integer personId) {
         this.mobile = mobile;
         this.email = email;
