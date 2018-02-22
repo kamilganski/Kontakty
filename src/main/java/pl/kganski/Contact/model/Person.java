@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "person", catalog = "test")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -28,6 +28,10 @@ public class Person {
     @NotNull
     private String pesel;
 
+    /*@OneToMany
+    @JoinColumn(name = "person_id")
+    private List<Contact> contacts;*/
+
     public Person() {
     }
 
@@ -43,11 +47,11 @@ public class Person {
         this.pesel = pesel;
     }
 
-    public Integer getId() {
+    public Integer getId_person() {
         return id_person;
     }
 
-    public void setId(Integer id_person) {
+    public void setId_person(Integer id_person) {
         this.id_person = id_person;
     }
 
@@ -90,4 +94,12 @@ public class Person {
     public void setPesel(String pesel) {
         this.pesel = pesel;
     }
+
+    /*public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }*/
 }

@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface PersonsRepository extends JpaRepository<Person, Integer> {
 
-    List<Person> findByName(String name);
+    public Person findById(Integer id);
+    public Person findByName(String name);
+    public Person findByPesel(String pesel);
 }

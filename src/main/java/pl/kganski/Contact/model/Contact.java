@@ -2,14 +2,14 @@ package pl.kganski.Contact.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "contact", catalog = "test")
+/*@Entity
+@Table(name = "contact")*/
 public class Contact {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idContact")
-    private Integer id;
+    @Column(name = "id_contact")
+    private Integer id_contact;
 
     @Column(name = "Mobile_Phone")
     private String mobile_phone;
@@ -20,26 +20,25 @@ public class Contact {
     @Column(name = "Phone")
     private String phone;
 
-    @Column(name = "idPerson")
-    private Integer personId;
-
     public Contact() {
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public Contact(String mobile_phone, String email, String phone) {
+        this.mobile_phone = mobile_phone;
+        this.email = email;
+        this.phone = phone;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public Contact(Integer id_contact) {
+        this.id_contact = id_contact;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getId_contact() {
+        return id_contact;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId_contact(Integer id_contact) {
+        this.id_contact = id_contact;
     }
 
     public String getMobile_phone() {
@@ -64,5 +63,5 @@ public class Contact {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
+    }*/
 }
