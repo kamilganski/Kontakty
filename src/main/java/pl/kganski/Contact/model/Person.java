@@ -1,6 +1,7 @@
 package pl.kganski.Contact.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -9,46 +10,45 @@ import java.util.List;
 public class Person {
 
     @Id
-    @GeneratedValue
-    @Column(name = "idPerson")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id_person;
 
-    @Column(name = "Name")
+    @NotNull
     private String name;
 
-    @Column(name = "Surname")
+    @NotNull
     private String surname;
 
-    @Column(name = "Gender")
+    @NotNull
     private String gender;
 
-    @Column(name = "Date_of_birth")
+    @NotNull
     private String date_of_birth;
 
-    @Column(name = "Pesel")
+    @NotNull
     private String pesel;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPerson", referencedColumnName = "idPerson")
-    private List<Contact> contactList;
 
     public Person() {
     }
 
-    public List<Contact> getContactList() {
-        return contactList;
+    public Person(Integer id_person) {
+        this.id_person = id_person;
     }
 
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+    public Person(String name, String surname, String gender, String date_of_birth, String pesel) {
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+        this.date_of_birth = date_of_birth;
+        this.pesel = pesel;
     }
 
     public Integer getId() {
-        return id;
+        return id_person;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_person) {
+        this.id_person = id_person;
     }
 
     public String getName() {
